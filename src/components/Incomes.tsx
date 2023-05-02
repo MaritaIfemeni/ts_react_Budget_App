@@ -1,56 +1,82 @@
-import React, { useEffect, useState } from "react";
-import UserInput from "./UserInput";
-import Balance from "./Balance";
+import React, {  useState } from "react";
 
 interface Income {
     name: string;
     amount: number;
-    dateReceived: string;
+    date: string;
   }
 
-const Incomes = () => {
-    const { income, nameInput, amountInput, handleSubmit } = UserInput();
-    const [incomes, setIncomes] = useState<Income[]>([]);
-    const [totalIncome, setTotalIncome] = useState(0);
+interface IncomeProps {
+    addedIncome: (amount: number) => void;
+  }
+
+  const useInput = () => {
+    const [value, setValue] = useState('')
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value)
+    }
+    return {
+        value,
+        onChange,
+    }
+}
+
+const Incomes = ( {addedIncome}:IncomeProps) => {
+  const inputType = useInput()
+  const inputAmount = useInput()
+  const inputDate = useInput()
+  const [incomes, setIncomes] = useState<Income[]>([]);
   
-    useEffect(() => {
-      if (income) {
-        setIncomes((prevIncomes) => [...prevIncomes, income]);
-        setTotalIncome((prevTotal) => prevTotal + income.amount);
-      }
-    }, [income]);
-  
+  const addIncomes = (e: React.FormEvent) => {
+    e.preventDefault()
+    const amount = Number(inputAmount.value);
+    const newIncome: Income = {
+      name: inputType.value,
+      amount: amount,
+      date: new Date(inputDate.value).toLocaleDateString('en-US', {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    }),
+}
+
+    setIncomes([...incomes, newIncome]);
+    addedIncome(amount);
+}
+
+
+
     return (
       <div>
         <h3>Incomes</h3>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={addIncomes}>
           <label htmlFor="income-name">Income source:</label>
           <br />
-          <input type="text" id="income-name" {...nameInput} />
+          <input type="text" id="income-name" {...inputType} />
           <br />
           <label htmlFor="income-amount">Amount:</label>
           <br />
-          <input type="number" id="income-amount" {...amountInput} />
+          <input type="number" id="income-amount" {...inputAmount} />
           <br />
           <label htmlFor="income-date">Date received:</label>
           <br />
-          <input type="date" id="income-date" value={new Date().toLocaleDateString()} />
+          <input type="date" id="income-date" {...inputDate} />
           <br />
           <button type="submit">Add Income</button>
           <br />
         </form>
         <ul>
           {incomes.map((income: any, index: number) => (
-            <li key={index}> {income.dateReceived} - 
+            <li key={index}> {income.date} - 
               {income.name} - ${income.amount}
             </li>
           ))}
 
         </ul>
-        <p>Total Income: ${totalIncome}</p>
-        <Balance totalIncome={totalIncome} />
+      
       </div>
     );
-  };
+          };
   
 export default Incomes;

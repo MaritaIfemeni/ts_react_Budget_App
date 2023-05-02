@@ -1,28 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 
-
-type Props = {
-    totalIncome: number;
+interface Props {
+  totalIncome: number;
+  totalTransfers: (amount: number) => void;
 }
 
+const Balance = ({ totalIncome, totalTransfers }: Props) => {
+  const [transfer, setTransfer] = useState<number>(0);
 
-const Balance: React.FC<Props> = (props) => {
-    const totalIncome = props.totalIncome;
+  const handleTransfer = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    totalTransfers(transfer);
+    setTransfer(0);
+  };
+
+  const handleTransferAmountChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newTransferAmount = parseInt(event.currentTarget.value);
+    setTransfer(newTransferAmount);
+  };
 
   return (
     <div>
       <h3>Savings</h3>
-      <form>
-        <label htmlFor="balance">Current Balance: {totalIncome} </label>
-        <br></br>
+      <form onSubmit={handleTransfer}>
+        <label htmlFor="balance">Current Balance: {totalIncome}</label>
+        <br />
         <label htmlFor="transfer">Transfer to savings account:</label>
-        <br></br>
-        <input type="text" id="transfer-savings" />
-        <br></br>
+        <br />
+        <input
+          type="number"
+          name="transfer"
+          id="transfer"
+          value={transfer}
+          onChange={handleTransferAmountChange}
+        />
+        <br />
         <button type="submit">Transfer</button>
-        <br></br>
+        <br />
       </form>
-
     </div>
   );
 };
