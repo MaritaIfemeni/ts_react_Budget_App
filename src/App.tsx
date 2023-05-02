@@ -11,23 +11,23 @@ function App() {
       <header className="App-header">
         <h1>Budget App</h1>
       </header>
+      <main className="main">
+        <section className="income">
+          <Incomes />
+        </section>
 
-      <section>
-        <Incomes />
-      </section>
+        <section className="expenses">
+          <Expenses />
+        </section>
 
-      <section>
-        <Expenses />
-      </section>
+        <section>
+          <Savings />
+        </section>
 
-      <section>
-        <Savings />
-      </section>
-
-      <section>
-        <Balance />
-      </section>
-
+        <section>
+          <Balance />
+        </section>
+      </main>
     </div>
   );
 }

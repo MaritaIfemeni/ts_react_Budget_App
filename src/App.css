@@ -2,3 +2,38 @@
   text-align: center;
 }
 
+main {
+
+  display: grid;
+  grid-template-areas: 
+   "income expenses saving"
+    "income expenses saving"
+    ". balance .";
+}
+
+section:nth-child(1) {
+  grid-area: income;
+  background-color: green;
+}
+
+section:nth-child(2) {
+  grid-area: expenses;
+  background-color: red;
+}
+
+section:nth-child(3) {
+  grid-area: saving;
+  background-color: blue;
+}
+
+section:nth-child(4) {
+  grid-area: balance;
+  background-color: yellow;
+}
+
+li {
+  list-style-type: ordered;
+  margin: 0;
+  padding: 0;
+}
+
