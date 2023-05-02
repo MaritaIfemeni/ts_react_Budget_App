@@ -5,6 +5,8 @@ import Expenses from "./components/Expenses";
 import Savings from "./components/Savings";
 import Balance from "./components/Balance";
 
+
+
 function App() {
   return (
     <div className="App">
@@ -25,7 +27,7 @@ function App() {
         </section>
 
         <section>
-          <Balance />
+       
         </section>
       </main>
     </div>
