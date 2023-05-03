@@ -10,8 +10,7 @@
 
 ## Deployment
 
--TODO
-
+Checkout the project from **[here](https://subdued-icicle.surge.sh/)**.
 
 ## Project structure
 ```	
