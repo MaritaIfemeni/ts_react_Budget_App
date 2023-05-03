@@ -9,25 +9,23 @@ import Balance from "../components/Balance";
 const BudgetPlan = () => {
   const [balance, setBalance] = useState(0);
   const [totalIncomes, setTotalIncomes] = useState(0);
-
+  const [errorMessage, setErrorMessage] = useState("");
   const addIncomes = (amount: number) => {
     setBalance((prevBalance) => prevBalance + amount);
   };
-
   const addExpenses = (amount: number) => {
     if (balance >= amount) {
       setBalance((prevBalance) => prevBalance - amount);
     } else {
-      alert("There is not enough money!");
+      setErrorMessage("There is not enough money!");
     }
   };
-
   const transferToSavings = (amount: number) => {
     if (balance >= amount) {
       setBalance((prevBalance) => prevBalance - amount);
       setTotalIncomes((prevIncome) => prevIncome + amount);
     } else {
-      alert("There is not enough money!");
+      setErrorMessage("There is not enough money!");
     }
   };
 
@@ -35,6 +33,7 @@ const BudgetPlan = () => {
     <div className="App">
       <header className="App-header">
         <h1>Budget App</h1>
+        {errorMessage && <p className="error">{errorMessage}</p>}
       </header>
       <main className="main">
         <section className="income">
@@ -47,7 +46,10 @@ const BudgetPlan = () => {
           <Savings totalIncome={totalIncomes} />
         </section>
         <section>
-            <Balance totalIncome={totalIncomes} totalTransfers={transferToSavings} />
+          <Balance
+            totalIncome={totalIncomes}
+            totalTransfers={transferToSavings}
+          />
         </section>
       </main>
     </div>

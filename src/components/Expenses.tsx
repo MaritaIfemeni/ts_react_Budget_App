@@ -26,7 +26,6 @@ const Expenses = ({ addedExpense }: ExpenseProps) => {
   const inputAmount = useInput();
   const inputDate = useInput();
   const [expenses, setExpenses] = useState<expense[]>([]);
-
   const addExpense = (e: React.FormEvent) => {
     e.preventDefault();
     const amount = Number(inputAmount.value);
@@ -34,13 +33,11 @@ const Expenses = ({ addedExpense }: ExpenseProps) => {
       name: inputType.value,
       amount: amount,
       date: new Date(inputDate.value).toLocaleDateString("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
+        year: "2-digit",
+        month: "numeric",
         day: "numeric",
       }),
     };
-
     setExpenses([...expenses, newExpense]);
     addedExpense(amount);
   };
@@ -50,24 +47,24 @@ const Expenses = ({ addedExpense }: ExpenseProps) => {
       <h3>Expenses</h3>
       <form onSubmit={addExpense}>
         <label htmlFor="expense-name">Expense type:</label>
-        <br></br>
+        <br />
         <input type="text" id="expense-name" {...inputType} />
-        <br></br>
+        <br />
         <label htmlFor="expense-amount">Amount:</label>
-        <br></br>
+        <br />
         <input type="number" id="expense-amount" {...inputAmount} />
-        <br></br>
+        <br />
         <label htmlFor="expense-date">Date paid:</label>
-        <br></br>
+        <br />
         <input type="date" id="expense-date" {...inputDate} />
-        <br></br>
+        <br />
         <button type="submit">Add Expense</button>
-        <br></br>
+        <br />
       </form>
       <ul>
         {expenses.map((expense: any, index: number) => (
           <li key={index}>
-            {expense.dateReceived} -{expense.name} - {expense.amount}
+            {expense.date} - {expense.name} - £{expense.amount}
           </li>
         ))}
       </ul>

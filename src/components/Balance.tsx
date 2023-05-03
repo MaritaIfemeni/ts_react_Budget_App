@@ -7,13 +7,11 @@ interface Props {
 
 const Balance = ({ totalIncome, totalTransfers }: Props) => {
   const [transfer, setTransfer] = useState<number>(0);
-
   const handleTransfer = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     totalTransfers(transfer);
     setTransfer(0);
   };
-
   const handleTransferAmountChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -23,11 +21,13 @@ const Balance = ({ totalIncome, totalTransfers }: Props) => {
 
   return (
     <div>
-      <h3>Savings</h3>
+      <h3>Balance</h3>
       <form onSubmit={handleTransfer}>
-        <label htmlFor="balance">Current Balance: {totalIncome}</label>
+        <label htmlFor="balance">
+          Current Balance: {totalIncome ? totalIncome.toFixed(0) : "0"} £
+        </label>
         <br />
-        <label htmlFor="transfer">Transfer to savings account:</label>
+        <label htmlFor="transfer">Transfer to savings account: </label>
         <br />
         <input
           type="number"
@@ -40,6 +40,7 @@ const Balance = ({ totalIncome, totalTransfers }: Props) => {
         <button type="submit">Transfer</button>
         <br />
       </form>
+      <br />
     </div>
   );
 };

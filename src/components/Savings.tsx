@@ -7,17 +7,17 @@ interface Props {
 const Savings = ({ totalIncome }: Props) => {
   const [target, setTarget] = useState<number>();
   const [current, setCurrent] = useState<number>();
-
   useEffect(() => {
     if (target) {
       const barPercent = (totalIncome / target) * 100;
       setCurrent(barPercent);
     }
   }, [target, totalIncome]);
-
   const modifiedTarget = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const targetValue = parseInt(e.currentTarget.target.valueOf());
+    const targetValue = parseInt(
+      (e.currentTarget.elements.namedItem("target") as HTMLInputElement).value
+    );
     setTarget(targetValue);
   };
 
@@ -31,12 +31,14 @@ const Savings = ({ totalIncome }: Props) => {
         <br />
         <button type="submit">Set</button>
         <br />
-        <label htmlFor="current">Current: {totalIncome}</label>
+        <label htmlFor="current">Current: {totalIncome} £</label>
         <br />
-        <label htmlFor="target">Target: {target} </label>
+        <label htmlFor="target">
+          Target: {target ? target.toFixed(0) : "0"} £
+        </label>
         <br />
         <label htmlFor="progress">
-          Progress: {current ? current.toFixed(0) : "-"}%{" "}
+          Progress: {current ? current.toFixed(0) : "0"} %
         </label>
         <br />
         <progress id="file" value={totalIncome} max={target}></progress>
@@ -44,4 +46,5 @@ const Savings = ({ totalIncome }: Props) => {
     </div>
   );
 };
+
 export default Savings;

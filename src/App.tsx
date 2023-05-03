@@ -1,6 +1,5 @@
 import BudgetPlan from "./views/BudgetPlan";
 
-
 const App = () => {
   return (
     <>
