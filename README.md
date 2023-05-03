@@ -6,6 +6,7 @@
 
 - TypeScript
 - React
+- SCSS
 
 ## Deployment
 
