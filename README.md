@@ -12,6 +12,13 @@
 
 Checkout the project from **[here](https://subdued-icicle.surge.sh/)**.
 
+## Getting started
+
+1. To clone repository use: git clone 
+2. To install the project run: npm install
+3. Refer to package.json for scripts 
+4. To run application in development mode run: npm start 
+
 ## Project structure
 ```	
 .
