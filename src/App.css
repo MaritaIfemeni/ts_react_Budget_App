@@ -4,40 +4,52 @@
 
 main {
   display: grid;
-  grid-template-areas: 
-   "income expenses saving"
-    "income expenses saving"
-    ". balance .";
+  grid-template-areas: "income expenses saving" "income expenses saving" ". balance .";
+  gap: 0.5em;
+  max-width: 80%;
+  margin: 0 auto;
 }
-
-section:nth-child(1) {
+main section {
+  border-radius: 2em;
+}
+main section:nth-child(1) {
   grid-area: income;
   background-color: green;
 }
-
-section:nth-child(2) {
+main section:nth-child(2) {
   grid-area: expenses;
   background-color: red;
 }
-
-section:nth-child(3) {
+main section:nth-child(3) {
   grid-area: saving;
   background-color: blue;
 }
-
-section:nth-child(4) {
+main section:nth-child(4) {
   grid-area: balance;
   background-color: yellow;
 }
-
-li {
+main li {
   list-style-type: ordered;
   margin: 0;
   padding: 0;
 }
-
-.error {
+main .error {
   color: red;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 1.5rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.5em;
 }
+
+@media (max-width: 1000px) {
+  main {
+    max-width: 60%;
+    margin: 0 auto;
+    grid-template-areas: "income" "expenses" "saving" "balance";
+  }
+  .error {
+    color: red;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-size: 1em;
+  }
+}
+
+/*# sourceMappingURL=App.css.map */
